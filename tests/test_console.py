@@ -130,7 +130,7 @@ class TestBaseModelDotNotation(unittest.TestCase):
 =======
 class TestHBNBCommand_help(unittest.TestCase):
     """Unittests for testing help messages of the HBNB command interpreter."""
->>>>>>> 3e928625a8413ca818fd393d2caa89e20da147c3
+
 
     def test_help_quit(self):
         h = "Quit command to exit the program"
