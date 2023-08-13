@@ -31,10 +31,9 @@ from models.state import State
 from models.city import City
 from models.amenity import Amenity
 from models.review import Review
-=======
 from io import StringIO
 from unittest.mock import patch
->>>>>>> 3e928625a8413ca818fd393d2caa89e20da147c3
+
 
 
 class TestHBNBCommand_prompting(unittest.TestCase):
@@ -48,7 +47,7 @@ class TestHBNBCommand_prompting(unittest.TestCase):
             self.assertFalse(HBNBCommand().onecmd(""))
             self.assertEqual("", output.getvalue().strip())
 
-<<<<<<< HEAD
+
     def tearDown(self) -> None:
         """Resets FileStorage data."""
         storage._FileStorage__objects = {}
@@ -127,7 +126,7 @@ class TestHBNBCommand_prompting(unittest.TestCase):
 class TestBaseModelDotNotation(unittest.TestCase):
     """Testing `Basemodel `commands using dot notation.
     """
-=======
+
 class TestHBNBCommand_help(unittest.TestCase):
     """Unittests for testing help messages of the HBNB command interpreter."""
 
@@ -546,7 +545,6 @@ class TestHBNBCommand_update(unittest.TestCase):
 
     @classmethod
     def setUp(self):
-<<<<<<< HEAD
         pass
 
     def tearDown(self) -> None:
@@ -615,7 +613,7 @@ class TestHBNBCommand_update(unittest.TestCase):
             HBNBCommand().onecmd(f'destroy State {st.id}')
             self.assertNotIn("State.{}".format(
                 st.id), storage.all().keys())
-=======
+
         try:
             os.rename("file.json", "tmp")
         except IOError:
@@ -823,7 +821,7 @@ class TestHBNBCommand_count(unittest.TestCase):
             self.assertFalse(HBNBCommand().onecmd("Review.count()"))
             self.assertEqual("1", output.getvalue().strip())
 
->>>>>>> 3e928625a8413ca818fd393d2caa89e20da147c3
+
 
 if __name__ == "__main__":
     unittest.main()
