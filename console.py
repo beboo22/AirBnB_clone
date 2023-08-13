@@ -6,7 +6,6 @@ import cmd
 import re
 import models
 from models.base_model import BaseModel
-#from models import storage
 import json
 from models.user import User
 from models.place import Place
@@ -190,17 +189,18 @@ class HBNBCommand(cmd.Cmd):
         if line is None:
             return
 
-        cmdPattern = "^([A-Za-z]+)\.([a-z]+)\(([^(]*)\)"
-        paramsPattern = """^"([^"]+)"(?:,\s*(?:"([^"]+)"|(\{[^}]+\}))(?:,\s*(?:("?[^"]+"?)))?)?"""
-        m = re.match(cmdPattern, line)
+        cmd_pattern = r"^([A-Za-z]+)\.([a-z]+)\(([^(]*)\)"
+        params_pattern = r"""^"([^"]+)"(?:,\s*
+        (?:"([^"]+)|(\{[^}]+\}))(?:,\s*(?:("?[^"]+"?)))?)?"""
+        m = re.match(cmd_pattern, line)
         if not m:
             super().default(line)
             return
-        mName, method, params = m.groups()
-        m = re.match(paramsPattern, params)
+        m_name, method, params = m.groups()
+        m = re.match(params_pattern, params)
         params = [item for item in m.groups() if item] if m else []
 
-        cmd = " ".join([mName] + params)
+        cmd = " ".join([m_name] + params)
 
         if method == 'all':
             return self.do_all(cmd)
