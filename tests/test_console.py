@@ -6,7 +6,7 @@ import os
 import unittest
 from unittest.mock import patch
 from console import HBNBCommand
-#from models import storage
+from models import storage
 import json
 from models.base_model import BaseModel
 from models.user import User
@@ -151,9 +151,9 @@ class TestBaseModel(unittest.TestCase):
 
     def tearDown(self) -> None:
         """Resets FileStorage data."""
-        FileStorage._FileStorage__objects = {}
-        if os.path.exists(FileStorage._FileStorage__file_path):
-            os.remove(FileStorage._FileStorage__file_path)
+        storage._FileStorage__objects = {}
+        if os.path.exists(storage._FileStorage__file_path):
+            os.remove(storage._FileStorage__file_path)
 
     def test_create_basemodel(self):
         """Test create basemodel object.
@@ -583,5 +583,6 @@ class TestState(unittest.TestCase):
             HBNBCommand().onecmd(f'destroy State {st.id}')
             self.assertNotIn("State.{}".format(
                 st.id), storage.all().keys())
+
 if __name__ == "__main__":
     unittest.main()

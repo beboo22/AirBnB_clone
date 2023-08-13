@@ -5,6 +5,7 @@
 import cmd
 import re
 import models
+from models import storage
 from models.engine.file_storage import FileStorage
 from models.base_model import BaseModel
 import json
@@ -73,10 +74,10 @@ class HBNBCommand(cmd.Cmd):
             print("** instance id missing **")
         else:
             new_str = f"{arr[0]}.{arr[1]}"
-            if new_str not in FileStorage.all():
+            if new_str not in storage.all():
                 print("** no instance found **")
             else:
-                print(FileStorage.all()[new_str])
+                print(storage.all()[new_str])
 
     def do_destroy(self, line):
         """Destroy command deletes an instance based on the class name and id
@@ -90,12 +91,12 @@ class HBNBCommand(cmd.Cmd):
             print("** instance id missing **")
         else:
             new_str = f"{arr[0]}.{arr[1]}"
-            if new_str not in FileStorage.all().keys():
+            if new_str not in storage.all().keys():
                 print("** no instance found **")
             else:
-                FileStorage.all().pop(new_str)
-            #    del (FileStorage.all()[new_str])
-                FileStorage.save()
+                storage.all().pop(new_str)
+            #    del (storage.all()[new_str])
+                storage.save()
 
     # def do_all(self, line):
     #    """ Print all instances in string representation """
@@ -117,13 +118,13 @@ class HBNBCommand(cmd.Cmd):
         """ Print all instances in string representation """
         objects = []
         if line == "":
-            print([str(value) for key, value in FileStorage.all().items()])
+            print([str(value) for key, value in storage.all().items()])
         else:
             st = line.split(" ")
             if st[0] not in class_home:
                 print("** class doesn't exist **")
             else:
-                for key, value in FileStorage.all().items():
+                for key, value in storage.all().items():
                     clas = key.split(".")
                     if clas[0] == st[0]:
                         objects.append(str(value))
@@ -162,7 +163,7 @@ class HBNBCommand(cmd.Cmd):
             return
         else:
             new_str = f"{arr[0]}.{arr[1]}"
-            if new_str not in FileStorage.all().keys():
+            if new_str not in storage.all().keys():
                 print("** no instance found **")
             elif len(arr) < 3:
                 print("** attribute name missing **")
@@ -171,8 +172,8 @@ class HBNBCommand(cmd.Cmd):
                 print("** value missing **")
                 return
             else:
-                setattr(FileStorage.all()[new_str], arr[2], arr[3])
-                FileStorage.save()
+                setattr(storage.all()[new_str], arr[2], arr[3])
+                storage.save()
 
     def do_count(self, line):
         """Print the count all class instances"""
@@ -181,7 +182,7 @@ class HBNBCommand(cmd.Cmd):
             print("** class doesn't exist **")
             return
         count = 0
-        for obj in FileStorage.all().values():
+        for obj in storage.all().values():
             if obj.__class__.__name__ == line:
                 count += 1
         print(count)

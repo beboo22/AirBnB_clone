@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-"""Unit tests for the city module.
+"""Unit tests for the `city` module.
 """
 import os
 import unittest
@@ -14,20 +14,20 @@ c3 = City("hello", "wait", "in")
 
 
 class TestCity(unittest.TestCase):
-    """Test cases for the City class."""
+    """Test cases for the `City` class."""
 
     def setUp(self):
         pass
 
     def tearDown(self) -> None:
         """Resets FileStorage data."""
-        FileStorage.FileStorage_objects = {}
-        if os.path.exists(FileStorage.FileStorage_file_path):
-            os.remove(FileStorage.FileStorage_file_path)
+        FileStorage._FileStorage__objects = {}
+        if os.path.exists(FileStorage._FileStorage__file_path):
+            os.remove(FileStorage._FileStorage__file_path)
 
     def test_params(self):
         """Test method for class attributes"""
-        k = f"{type(c1).name}.{c1.id}"
+        k = f"{type(c1).__name__}.{c1.id}"
         self.assertIsInstance(c1.name, str)
         self.assertEqual(c3.name, "")
         c1.name = "Abuja"
@@ -50,11 +50,11 @@ class TestCity(unittest.TestCase):
         """Test method for dict"""
         a_dict = c2.to_dict()
         self.assertIsInstance(a_dict, dict)
-        self.assertEqual(a_dict['class'], type(c2).name)
+        self.assertEqual(a_dict['__class__'], type(c2).__name__)
         self.assertIn('created_at', a_dict.keys())
         self.assertIn('updated_at', a_dict.keys())
         self.assertNotEqual(c1, c2)
 
 
-if name == "main":
+if __name__ == "__main__":
     unittest.main()
