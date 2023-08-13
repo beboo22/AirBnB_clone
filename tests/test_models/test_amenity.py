@@ -3,7 +3,7 @@
 """
 import os
 import unittest
-from models import storage
+#from models import storage
 from datetime import datetime
 from models.amenity import Amenity
 from models.engine.file_storage import FileStorage
@@ -18,8 +18,8 @@ class TestAmenity(unittest.TestCase):
     def tearDown(self) -> None:
         """Resets FileStorage data."""
         FileStorage.FileStorage_objects = {}
-        if os.path.exists(FileStorage.FileStorage_file_path):
-            os.remove(FileStorage.FileStorage_file_path)
+        if os.path.exists(FileStorage.file_path):
+            os.remove(FileStorage.file_path)
 
     def test_params(self):
         """Test method for class attributes"""
@@ -67,5 +67,5 @@ class TestAmenity(unittest.TestCase):
         self.assertNotEqual(a1, a2)
 
 
-if name == "main":
+if __name__ == "__main__":
     unittest.main()
