@@ -162,7 +162,7 @@ class HBNBCommand(cmd.Cmd):
             return
         else:
             new_str = f"{arr[0]}.{arr[1]}"
-            if new_str not in storage.all().keys():
+            if new_str not in FileStorage.all().keys():
                 print("** no instance found **")
             elif len(arr) < 3:
                 print("** attribute name missing **")
@@ -171,8 +171,8 @@ class HBNBCommand(cmd.Cmd):
                 print("** value missing **")
                 return
             else:
-                setattr(storage.all()[new_str], arr[2], arr[3])
-                storage.save()
+                setattr(FileStorage.all()[new_str], arr[2], arr[3])
+                FileStorage.save()
 
     def do_count(self, line):
         """Print the count all class instances"""
