@@ -6,7 +6,7 @@ import cmd
 import re
 import models
 from models.base_model import BaseModel
-from models import storage
+#from models import storage
 import json
 from models.user import User
 from models.place import Place
@@ -36,12 +36,11 @@ class HBNBCommand(cmd.Cmd):
 
     def do_quit(self, line):
         """Quit command to exit the program"""
-        print("Good Bye!")
         return True
 
     def help_quit(self):
         """when two arguments involve"""
-        print('\n'.join(["Quit command to exit the program"]))
+        print('\n'.join(["Quit command to exit the program\n"]))
 
     def emptyline(self):
         """ overwriting the emptyline method """
